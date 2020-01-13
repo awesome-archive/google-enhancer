@@ -7,11 +7,16 @@
 
 "use strict";
 
+let shortcutList = document.getElementById("shortcutList");//list frame for wrap list items
+
 function saveChoice (e) {
 	let name = e.target.name;
 	let checked = e.target.checked;
 	let value = checked ? 1 : 0;
 	setItemByKey(name, value);
+	if(name == "shortcut"){
+		shortcutList.style.display = checked ? "block" : "none";
+	}
 }
 
 function setItem (obj) {
@@ -41,12 +46,15 @@ function getItem (obj, callback) {
     * Time range search on context menu: default false
     * Night mode: default false
     * Card style UI: default false
+    * shortcutSite: array, always generate
 */
 const defaultSettings = {
 	"flipPage": 1,
 	"dblclickToTop": 1,
 	"newTab": 1,
 	"siteSearch": 0,
+	"shortcut": 0,
+	"shortcutSite": [],
 	"kwColor": "#dd4b39",
 	"kwBgColor": "#ffffff",
 	"kwOpacity": 0.4,
@@ -54,26 +62,27 @@ const defaultSettings = {
 	"timeRangeSearch": 0,
 	"nightMode": 0,
 	"cardStyle": 0,
-	"sformPinned": 0,
+	//"sformPinned": 0,
 	"endless": 0
 };
 
 window.onload = function () {
 	const settingButtons = {
-		flipPage: document.querySelector(".flipPage"),
-		dblclickToTop: document.querySelector(".dblclickToTop"),
-		newTab: document.querySelector(".newTab"),
-		siteSearch: document.querySelector(".siteSearch"),
-		kwColor: document.querySelector(".kwColor"),
-		kwBgColor: document.querySelector(".kwBgColor"),
-		kwOpacity: document.querySelector(".kwOpacity"),
-		kwOpacityValue: document.getElementById("kwOpacityValue"),
-		filetypeSearch: document.querySelector(".filetypeSearch"),
-		timeRangeSearch: document.querySelector(".timeRangeSearch"),
-		nightMode: document.querySelector(".nightMode"),
-		cardStyle: document.querySelector(".cardStyle"),
-		sformPinned: document.querySelector(".sformPinned"),
-		endless: document.querySelector(".endless")
+		flipPage: document.querySelector(".js-flipPage"),
+		dblclickToTop: document.querySelector(".js-dblclickToTop"),
+		newTab: document.querySelector(".js-newTab"),
+		siteSearch: document.querySelector(".js-siteSearch"),
+		shortcut: document.querySelector(".js-shortcut"),
+		kwColor: document.querySelector(".js-kwColor"),
+		kwBgColor: document.querySelector(".js-kwBgColor"),
+		kwOpacity: document.querySelector(".js-kwOpacity"),
+		kwOpacityValue: document.querySelector(".js-kwOpacityValue"),
+		filetypeSearch: document.querySelector(".js-filetypeSearch"),
+		timeRangeSearch: document.querySelector(".js-timeRangeSearch"),
+		nightMode: document.querySelector(".js-nightMode"),
+		cardStyle: document.querySelector(".js-cardStyle"),
+		//sformPinned: document.querySelector(".js-sformPinned"),
+		endless: document.querySelector(".js-endless")
 	};
 
 	function resetAll () {
@@ -111,6 +120,19 @@ window.onload = function () {
 						button.disabled = false;
 						break;
 					}
+					case "shortcutSite": {
+						setItemByKey(name, value);
+						break;
+					}
+					case "shortcut": {
+						checked = !!parseInt(value);
+						setItemByKey(name, parseInt(value));
+						button.checked = checked;
+						shortcutList.style.display = checked ? "block" : "none";
+						button.onchange = saveChoice;
+						button.disabled = false;
+						break;
+					}
 					default: {
 						checked = !!parseInt(value);
 						setItemByKey(name, parseInt(value));
@@ -127,13 +149,71 @@ window.onload = function () {
 	function i18n () {
 		let objects = document.getElementsByTagName('*');
 		for(let i = 0; i < objects.length; i++) {
-			if (objects[i].dataset && objects[i].dataset.message) {
-				objects[i].childNodes[0].textContent = chrome.i18n.getMessage(objects[i].dataset.message);
+			if (objects[i].dataset && objects[i].dataset.i18n) {
+				objects[i].childNodes[0].textContent = chrome.i18n.getMessage(objects[i].dataset.i18n);
 			}
+		}
+	}
+
+	function GeListItem(title,id) {
+		this.title = title;
+		this.id = id;
+		this.ele =	document.createElement("li");
+		this.ele.dataset.index = `${id}`;
+		this.ele.innerHTML = `
+                    <label class="section__item">
+                        <div class="section__item-main">${title}<div class="section__item-tip">${id}</div></div>
+                        <div class="section__item-secondary">
+                            <span class="section__item-close"></span>
+                        </div>
+                    </label>`;
+		this.init();
+	}
+
+	GeListItem.prototype = {
+		init: function () {
+			let that = this;
+			document.getElementById("shortcutList").appendChild(that.ele);
+			that.ele.addEventListener("click",that.delItem);
+		},
+		delItem: function (e) {
+			e.stopPropagation();
+			let parent = e.target;
+			if(e.target && e.target.className == "section__item-close"){
+				while (parent = parent.parentElement || parent.parentNode){
+					if (parent.nodeName == "LI") break;
+				}
+			}
+			parent.parentNode.removeChild(parent);
+
+			let index = parent.dataset.index;
+			getItem("shortcutSite",function (result) {
+				let arr = result.shortcutSite;
+				for(let i = 0,len = arr.length; i < len; i++){
+					let item = JSON.parse(arr[i]);
+					if(item.id == index){
+						arr.splice(i, 1);
+						break;
+					}
+				}
+				setItem({"shortcutSite": arr});
+			});
+		}
+	};
+
+	function setListItem (result,key) {
+		let arr = result[key];
+		if(arr == undefined) return; //for first install, storage may not generate
+		for(let i = 0,len = arr.length; i < len; i++){
+			let obj = JSON.parse(arr[i]);
+			let item = new GeListItem(obj.title,obj.id);
 		}
 	}
 
 	document.getElementById("allDefault").onclick = resetAll;
 	i18n();
+	getItem("shortcutSite",function (result) {
+		setListItem(result,"shortcutSite");
+	});
 	restoreSetting();
 };

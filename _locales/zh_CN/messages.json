@@ -8,7 +8,7 @@
     "description": "extension update info title"
   },
   "extUpdateMsg": {
-    "message": "",
+    "message": "移除浮动搜索框功能",
     "description": "extension update info message"
   },
   "optionTitle": {
@@ -16,7 +16,7 @@
     "description": "option page title"
   },
   "optionHeader": {
-    "message": "设置",
+    "message": "Google Enhencer 设置",
     "description": "option header-left h1"
   },
   "globalSectionTitle": {
@@ -36,10 +36,10 @@
     "message": "在新标签页开启链接"
   },
   "sformPinnedName": {
-    "message": "搜索栏随页面滚动"
+    "message": "浮动搜索框"
   },
   "sformPinnedTip": {
-    "message": "(图片搜索下不可用)"
+    "message": "搜索框随页面滚动(图片搜索下不可用)"
   },
   "endlessName": {
     "message": "无尽模式"
@@ -79,6 +79,15 @@
   },
   "timeRangeSearchTip": {
     "message": "在特定时间范围内进行搜索"
+  },
+  "customSectionTitle": {
+    "message": "自定义"
+  },
+  "shortcutName": {
+    "message": "我的快捷站点（右键菜单）"
+  },
+  "shortcutTip": {
+    "message": "为站内搜索添加自定义站点"
   },
   "appearanceSectionTitle": {
     "message": "外观"
@@ -141,8 +150,12 @@
     "message": "自定日期范围"
   },
   "siteSearch": {
-    "message": "在本站内搜索 '%s' ",
+    "message": "站内搜索",
     "description": "site search parent menu"
+  },
+  "siteSearchCurrent": {
+    "message": "在本站内搜索 '%s'",
+    "description": "site search child menu first item"
   },
   "filetypeSearch": {
     "message": "按文件类型搜索",
@@ -151,5 +164,36 @@
   "timeRangeSearch": {
     "message": "按时间范围搜索",
     "description": "time range search parent menu"
+  },
+  "shortcut": {
+    "message": "添加快捷站点",
+    "description": "shortcut site parent menu"
+  },
+  "popUpTopTitle": {
+    "message": "添加快捷站点：<span></span>",
+    "description": "popup page title"
+  },
+  "popUpContentLabel": {
+    "message": "网站名称",
+    "description": "popup content label"
+  },
+  "popUpCloseBtn": {
+    "message": "取消"
+  },
+  "popUpActionBtn": {
+    "message": "添加",
+    "description": "popup action button"
+  },
+  "shortcutAddSuccess": {
+    "message": "添加成功！",
+    "description": "add shortcut site success"
+  },
+  "shortcutAddRepeat": {
+    "message": "您已添加过相同站点：",
+    "description": "add repeat site"
+  },
+  "storageShortcutFull": {
+    "message": "存储已满！\n请在设置页删除一些快捷站点，然后再试",
+    "description": "storage check for shortcut site"
   }
 }

@@ -182,6 +182,13 @@ a.fl,
 
 /*other*/
 ._Tgc { color: gray !important; }
+._Z1m,
+._F5r>div {
+    background: #333 !important;
+    color: gray !important;
+}
+._f6x { color: gray !important; }
+._o0x:hover { background: #5f5f5f !important; }
 
 /*people also ask*/
 ._qgo {
@@ -192,18 +199,37 @@ a.fl,
 .rl_item .title,
 ._Rsi,
 ._qhf { color: gray !important; }
+
 ._SWb a.fl,
 ._Kjf,
+.ktf,
 ._bfj { background: #333 !important; }
+
+.ktf { color: #fff; }
 
 /*see results about*/
 #rhs ._wD.rhsvw:hover { background: #333 !important; }
+#rhs .rhsvw:hover { background: #333 !important; }
 
 #res a:visited,
 #extrares a:visited {
     color: #999 !important;
 }
 
+/*top answer*/
+.ZINbbc,
+.zDBTmf>div,
+.EDUkIb:hover { background: #333 !important; }
+.EDUkIb,
+.oJ9nG,
+.hwx1 { color: gray !important; }
 /*compatibility with cardstyle UI*/
 .g,
 #botstuff { background: #333 !important; }
+
+/*fix conflict with searchEngineJump*/
+#sej-container,
+#sej-container a,
+.sej-engine:hover {
+    background: #333 !important;
+}

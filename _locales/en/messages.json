@@ -8,7 +8,7 @@
     "description": "extension update info title"
   },
   "extUpdateMsg": {
-    "message": "",
+    "message": "Remove search form pinned on top function",
     "description": "extension update info message"
   },
   "optionTitle": {
@@ -16,7 +16,7 @@
     "description": "option page title"
   },
   "optionHeader": {
-    "message": "Settings",
+    "message": "Google Enhencer Settings",
     "description": "option header-left h1"
   },
   "globalSectionTitle": {
@@ -80,6 +80,15 @@
   "timeRangeSearchTip": {
     "message": "Find pages updated within the time you specify"
   },
+  "customSectionTitle": {
+    "message": "Custom"
+  },
+  "shortcutName": {
+    "message": "My Shortcut Site (context menu)"
+  },
+  "shortcutTip": {
+    "message": "Add custom shortcut site for Site Search"
+  },
   "appearanceSectionTitle": {
     "message": "Appearance"
   },
@@ -141,8 +150,12 @@
     "message": "Custom range"
   },
   "siteSearch": {
-    "message": "Search '%s' in current site",
+    "message": "Site Search",
     "description": "site search parent menu"
+  },
+  "siteSearchCurrent": {
+    "message": "Search '%s' in current site",
+    "description": "site search child menu first item"
   },
   "filetypeSearch": {
     "message": "File Type Search",
@@ -151,5 +164,35 @@
   "timeRangeSearch": {
     "message": "Time Range Search",
     "description": "time range search parent menu"
+  },
+  "shortcut": {
+    "message": "Add Shortcut Site",
+    "description": "shortcut site parent menu"
+  },
+  "popUpTopTitle": {
+    "message": "Add Shortcut Site: <span></span> "
+  },
+  "popUpContentLabel": {
+    "message": "Site Name",
+    "description": "popup content label"
+  },
+  "popUpCloseBtn": {
+    "message": "CANCEL"
+  },
+  "popUpActionBtn": {
+    "message": "ADD",
+    "description": "popup action button"
+  },
+  "shortcutAddSuccess": {
+    "message": "Add success !",
+    "description": "add shortcut site success"
+  },
+  "shortcutAddRepeat": {
+    "message": "You've added the same site: ",
+    "description": "add repeat site"
+  },
+  "storageShortcutFull": {
+    "message": "The storage is full !\nPlease delete some shortcut sites in option page, and try again",
+    "description": "storage check for shortcut site"
   }
 }
